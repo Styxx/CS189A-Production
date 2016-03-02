@@ -1,6 +1,6 @@
 OmniApp::Application.routes.draw do
 
-  match '/users',      to: 'users#updateSurvey',        via: 'post'
+  match '/users/updateSurvey',      to: 'users#updateSurvey',        via: 'post'
 
   match '/users/updateGenre', to: 'users#updateGenre', via: 'post'
 
@@ -8,15 +8,22 @@ OmniApp::Application.routes.draw do
 
   match '/users/addMedia', to: 'users#addMedia', via: 'post'
 
+  match '/users/editSurvey',      to: 'users#editSurvey',        via: 'post'
+
+  match '/users/create_event',      to: 'users#create_event',        via: 'post'
 
   resources :users
 
   # asks the router to match the request to the edit action of the users' controller
-  get     'edit' => 'users#edit'
-  get     'edit2' => 'users#edit2'
+  post "users/save_user_location" => 'users#save_user_location', :as => :save_user_location
+  #post "save_user_location" => 'users#save_user_location'
+  get  'edit' => 'users#edit'
+  get  'edit2' => 'users#edit2'
   post "users/matchChoice"
   get 'view_matches' => 'users#view_matches'
   get 'findMatch' => 'users#findMatch'
+  get 'events' => 'users#get_local_events'
+  get 'user_events' => 'users#get_user_events'
 
 
 =begin
@@ -37,16 +44,19 @@ OmniApp::Application.routes.draw do
   root               'home#home'
   get     'about'    => 'home#about'
   get     'profile'  => 'users#show'
-  get     'matching' => 'users#findMatch'
+  get     'matching' => 'users#findMatch', :as => :find_match
+  get     'testmatching' => 'users#testFindMatch', :as => :testFindMatch
 
   get     'users/:id/matches'  => 'users#showMatches', :as => :user_matches
+  get     "users/:id/messagesList" =>  'users#showMsgList', :as => :messages_list
   get     'users/:id/messages'  => 'users#showMatchMsgs', :as => :user_match_msg
   get     'users/:ids/groupsMessages' =>  'users#showGroupMsgs', :as => :group_msgs
   post    "users/:id/createChat" => 'users#createChat', :as => :create_chat
   post    "users/:ids/createGroupChat" => 'users#createGroupChat', :as => :create_group_chat
+  post    "users/newChat" => 'users#newChat', :as => :new_chat
 
 
-  
+
   #get 'home/profile'          # Currently empty; exists only to pass home/profile test
                                # change to users/profile?
 
@@ -96,7 +106,7 @@ OmniApp::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

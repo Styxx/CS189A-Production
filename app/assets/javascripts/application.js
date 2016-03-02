@@ -14,10 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-datepicker
 //= require_tree .
+//= require select2.min.js
 
-//$(document).ready(function() {
-//    $('#msgSubmit').click(function() {
-//        $("#msgList").load('/users/9/messages #msgList');
-//    });
-//});

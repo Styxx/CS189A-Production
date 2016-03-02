@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111064028) do
+ActiveRecord::Schema.define(version: 20160223224440) do
 
   create_table "chats", force: :cascade do |t|
     t.string   "body"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20160111064028) do
   end
 
   add_index "chats", ["user_id"], name: "index_chats_on_user_id"
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.string   "date"
+    t.text     "description"
+    t.string   "url"
+    t.string   "location"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "user_id"
+  end
 
   create_table "genres", force: :cascade do |t|
     t.string   "genre"
@@ -45,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160111064028) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "genres"
   end
 
   create_table "instrument_choices", force: :cascade do |t|
@@ -99,9 +111,9 @@ ActiveRecord::Schema.define(version: 20160111064028) do
   add_index "messages", ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids"
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.string   "name",       limit: 255
+    t.string   "provider",       limit: 255
+    t.string   "uid",            limit: 255
+    t.string   "name",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
@@ -110,6 +122,9 @@ ActiveRecord::Schema.define(version: 20160111064028) do
     t.integer  "age"
     t.string   "image"
     t.text     "bio"
+    t.string   "interest_level"
+    t.float    "radius"
+    t.integer  "user_likes"
   end
 
 end
