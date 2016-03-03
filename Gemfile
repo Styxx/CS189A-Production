@@ -7,6 +7,9 @@ source 'https://rubygems.org'
 gem 'layer-ruby', require: 'layer'
 gem 'acts-as-messageable'
 gem 'rails','4.2.2'
+gem 'bootstrap-datepicker-rails'
+# MATERIALIZE GEM
+# gem 'materialize-sass'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.0.rc2'
@@ -38,6 +41,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'tabulous'
 
+gem 'neography'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -59,13 +64,21 @@ gem 'omniauth-facebook'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
+gem 'soundcloud'
+
+gem 'htmlentities'
+
+gem 'select2-rails'
+
 # Databases for Active Record
 group :development do
   gem 'sqlite3'
 end
+
 
 group :production do
   gem 'pg'                # Heroku uses PG database
   gem 'rails_12factor'    # For heroku full functionality
   gem 'puma'              # HTTP server able to handle more traffic
 end
+
