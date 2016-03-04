@@ -3,6 +3,7 @@ require 'open-uri'
 
 class UsersController < ApplicationController
   protect_from_forgery except: [:showMatchMsgs, :save_user_location]
+  skip_before_filter :verify_authenticity_token
 
   @neo = Neography::Rest.new("http://neo4j:arbor94@localhost.com:7474")
 
@@ -141,7 +142,7 @@ class UsersController < ApplicationController
   def findMatch
 
 
-    allU = User.all
+    allU = User.all.where("id != ?", current_user.id)
     closeU = [], elligibleU = []
     myLookingForInstruments = [], myInstruments = [],  myGenres = []
     sorted = Hash.new
@@ -169,26 +170,26 @@ class UsersController < ApplicationController
     elligibleU.each do |user|
       score = 0
       #  FIRST CHECK TO SEE IF MATCH IS USER'S RADIUS
-      #if User.getDistance([current_user.lat, current_user.lon], [user.lat, user.lon]) <= current_user.radius
-      userPlays = user.instruments.where("play = ?", true)
-      userWants = user.instruments.where("play = ?", false)
-      userGenre = user.genres
+      #if User.getDistance([current_user.lat, current_user.long], [user.lat, user.long]) <= current_user.radius
+        userPlays = user.instruments.where("play = ?", true)
+        userWants = user.instruments.where("play = ?", false)
+        userGenre = user.genres
 
-      # 1. get points for instruments and experience
-      score += Matching.getInstrumentAndExperiencePoints(myLookingForInstruments, userPlays, myInstruments, userWants)
+        # 1. get points for instruments and experience
+        score += Matching.getInstrumentAndExperiencePoints(myLookingForInstruments, userPlays, myInstruments, userWants)
 
-      # 2. if score = 0, then not matchable, because no instruments match. if != 0, then proceed to get other points
-      if score != 0
-        # 3. get genre points
-        score += Matching.getGenrePoints(myGenres, userGenre)
+        # 2. if score = 0, then not matchable, because no instruments match. if != 0, then proceed to get other points
+        if score != 0
+          # 3. get genre points
+          score += Matching.getGenrePoints(myGenres, userGenre)
 
-        # 4. get influence points
-        #score += Matching.getInfluencePoints(current_user.influences, user.influences)
-        # 5. get profile likes points
+          # 4. get influence points
+          score += Matching.getInfluencePoints(current_user.influences, user.influences)
+          # 5. get profile likes points
 
-        # FINALLY add user and score to hash.
-        sorted[user.id.to_s] = score
-      end
+          # FINALLY add user and score to hash.
+          sorted[user.id.to_s] = score
+        end
       #end
 
     end
@@ -229,7 +230,7 @@ class UsersController < ApplicationController
     allU.each do |user|
       score = 0
       #  FIRST CHECK TO SEE IF MATCH IS USER'S RADIUS
-      #if User.getDistance([current_user.lat, current_user.lon], [user.lat, user.lon]) <= current_user.radius
+      if User.getDistance([current_user.lat, current_user.long], [user.lat, user.long]) <= current_user.radius
         userPlays = user.instruments.where("play = ?", true)
         userWants = user.instruments.where("play = ?", false)
         userGenre = user.genres
@@ -243,13 +244,13 @@ class UsersController < ApplicationController
           score += Matching.getGenrePoints(myGenres, userGenre)
 
           # 4. get influence points
-          #score += Matching.getInfluencePoints(current_user.influences, user.influences)
+          score += Matching.getInfluencePoints(current_user.influences, user.influences)
           # 5. get profile likes points
 
           # FINALLY add user and score to hash.
           sorted[user.id.to_s] = score
         end
-      #end
+      end
 
     end
 
@@ -441,7 +442,11 @@ class UsersController < ApplicationController
 
   def create_event
     date_time_format = params[:date] + ' ' + params[:time]  #yyyy:mm:dd time
-    Event.add(session[:user_id], params[:title], date_time_format, params[:descript], params[:link], params[:location])
+    link = params[:link]
+    if !link.start_with? 'http'
+      link = 'http://' + link
+    end
+    Event.add(session[:user_id], params[:title], date_time_format, params[:descript], link, params[:location])
     redirect_to action: "get_user_events"
   end
 
