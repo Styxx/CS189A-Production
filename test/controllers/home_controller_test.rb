@@ -1,15 +1,16 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionController::TestCase
-  test "should get home" do
-    get :home
-    assert_response :success
-  end
   
-  test "should get about" do
-    get :home
-    assert_response :success
-  end
+  #test "should get home" do
+  #  get :home
+  #  assert_response :success
+  #end
+  
+  #test "should get about" do
+  #  get :home
+  # assert_response :success
+  #end
   
   # Outdated test. Probably want to delete
   #test "should get index" do

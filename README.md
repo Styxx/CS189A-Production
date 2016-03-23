@@ -2,12 +2,13 @@
 #### Finding a _medium_ for musicians to collaborate
 #### CS 189 - Senior Capstone Project
 ###### Winter Instructor: Tim Sherwood
-###### Fall Instructor: Chandra Krintz (ckrintz@cs.ucsb.edu)
-###### Fall TA: Daniel Imberman (dimberman@umail.ucsb.edu)
+###### Winter TA: Jordan Hughes
+###### Fall Instructor: Chandra Krintz
+###### Fall TA: Daniel Imberman
 ###### Mentors: *Appfolio* 
-- Brynjar Gretarsson (brynjar.gretarsson@appfolio.com)
-- Andrew Mutz (andrew.alan.mutz@appfolio.com)
-- Daniel Vicory (daniel.vicory@appfolio.com)
+- Brynjar Gretarsson
+- Andrew Mutz
+- Daniel Vicory
 
 ### Team Gigs:
 - Sagar Saija - Lead Software Developer
@@ -15,6 +16,3 @@
 - Vincent Chang - Software Developer/Scribe
 - Mason Levy - Software Developer
 - Prithvi Sathiya - Software Developer
-
-
-#### [Trello](https://trello.com/b/zl9blTis/mezzo)
