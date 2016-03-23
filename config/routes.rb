@@ -15,15 +15,16 @@ OmniApp::Application.routes.draw do
   resources :users
 
   # asks the router to match the request to the edit action of the users' controller
-  post "save_user_location" => 'users#save_user_location', :as => :save_user_location
+
+  post "/users/save_user_location" => 'users#save_user_location', :as => :save_user_location
   #post "save_user_location" => 'users#save_user_location'
   get  'edit' => 'users#edit'
   get  'edit2' => 'users#edit2'
   post "users/matchChoice"
   get 'view_matches' => 'users#view_matches'
-  get 'findMatch' => 'users#findMatch'
   get 'events' => 'users#get_local_events'
   get 'user_events' => 'users#get_user_events'
+  get 'add_event' => 'users#add_event'
 
 
 =begin
@@ -63,7 +64,7 @@ OmniApp::Application.routes.draw do
 
   get 'auth/:provider/callback', to: "sessions#create"
 
-  delete 'sign_out', to: "sessions#destroy", as: 'sign_out'
+  get 'sign_out', to: "sessions#destroy", as: 'sign_out'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

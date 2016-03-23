@@ -7,7 +7,6 @@ source 'https://rubygems.org'
 gem 'layer-ruby', require: 'layer'
 gem 'acts-as-messageable'
 gem 'rails','4.2.2'
-gem 'bootstrap-datepicker-rails'
 # MATERIALIZE GEM
 # gem 'materialize-sass'
 
@@ -68,6 +67,7 @@ gem 'soundcloud'
 
 gem 'htmlentities'
 
+gem 'select2-rails'
 
 # Databases for Active Record
 group :development do
