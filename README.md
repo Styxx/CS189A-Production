@@ -1,10 +1,8 @@
-# Mezzo [![Build Status](https://travis-ci.com/masonl93/INTERNAL-CS189A.svg?token=pQvxcmrbHMs3QsSaUN6U&branch=master)](https://travis-ci.com/masonl93/INTERNAL-CS189A)
+# Mezzo [![Build Status](https://travis-ci.org/Styxx/CS189A-Production.svg?branch=master)](https://travis-ci.org/Styxx/CS189A-Production)
 #### Finding a _medium_ for musicians to collaborate
 #### CS 189 - Senior Capstone Project
-###### Winter Instructor: Tim Sherwood
-###### Winter TA: Jordan Hughes
-###### Fall Instructor: Chandra Krintz
-###### Fall TA: Daniel Imberman
+###### Instructors: Tim Sherwood (Winter), Chandra Krintz (Fall)
+###### TAs: Jordan Hughes (Winter), Daniel Imberman (Fall)
 ###### Mentors: *Appfolio* 
 - Brynjar Gretarsson
 - Andrew Mutz
